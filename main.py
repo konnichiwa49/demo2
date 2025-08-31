@@ -1,5 +1,6 @@
 from rich import print
 import argparse
+import datetime
 
 
 def cmd_hello(args):
@@ -16,6 +17,19 @@ def cmd_echo(args):
 
 def cmd_info(args):
     print("[bold green]OK[/]")
+
+
+def cmd_calc(args):
+    try:
+        result = eval(args.expr, {}, {})
+        print(f"[bold yellow]{args.expr}[/] = [bold cyan]{result}[/]")
+    except Exception as e:
+        print(f"[red]Error:[/] {e}")
+
+
+def cmd_time(args):
+    now = datetime.datetime.now().isoformat(sep=" ", timespec="seconds")
+    print(f"[bold magenta]{now}[/]")
 
 
 def main():
@@ -37,6 +51,13 @@ def main():
 
     sp = sub.add_parser("info")
     sp.set_defaults(func=cmd_info)
+
+    sp = sub.add_parser("calc")
+    sp.add_argument("expr")
+    sp.set_defaults(func=cmd_calc)
+
+    sp = sub.add_parser("time")
+    sp.set_defaults(func=cmd_time)
 
     args = p.parse_args()
     args.func(args)

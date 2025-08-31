@@ -1,4 +1,5 @@
-import subprocess, sys
+import subprocess
+import sys
 
 PY = sys.executable
 
@@ -27,3 +28,13 @@ def test_echo():
 def test_info():
     out = run("info")
     assert "OK" in out
+
+
+def test_calc():
+    out = run("calc", "3*7+2")
+    assert "23" in out
+
+
+def test_time():
+    out = run("time")
+    assert out  # 何か文字列が出ればOK
