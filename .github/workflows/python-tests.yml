@@ -11,6 +11,6 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: black --check .
-      - run: flake8 .
+      - run: black --check --exclude ".venv|__pycache__" .
+      - run: flake8 . --exclude .venv,__pycache__
       - run: pytest -v
