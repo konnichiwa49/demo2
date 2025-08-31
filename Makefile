@@ -5,6 +5,9 @@ fmt:
 lint:
 	. .venv/bin/activate && flake8 .
 repl:
+
+cli:
+	. .venv/bin/activate && python main.py hello --name You
 	. .venv/bin/activate && ipython
 
 test:
